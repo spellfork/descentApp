@@ -19,6 +19,11 @@ module.exports = function(grunt) {
     };
     
     grunt.initConfig({
+        open: {
+            start: {
+                path: 'http://localhost:' + SERVER_PORT
+            }
+        },
         watch: {
             less: {
                 files: ['less/*.less'],
@@ -41,11 +46,11 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: '.',
                         src: ['font/**', 'img/**', 'css/**', 'script/**', 'index.html'],
-                        dest: '<%= appConfig.dist %>'
+                        dest: 'dist'
                     },
                     {
                         src: 'node_modules/apache-server-configs/dist/.htaccess',
-                        dest: '<%= appConfig.dist %>/.htaccess'
+                        dest: 'dist/.htaccess'
                     }
                 ]
             }
@@ -96,6 +101,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'less:compile',
         'connect',
+        'open:start',
         'watch'
     ]);
     
